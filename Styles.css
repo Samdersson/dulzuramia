@@ -29,6 +29,27 @@ nav ul li {
     margin: 0 15px;
 }
 
+nav ul li a {
+    background: linear-gradient(145deg, #ff5dbc, #fc9bdc);
+    border-radius: 12px;
+    box-shadow: 5px 5px 10px #c43a7f,
+                -5px -5px 10px #ff7fc1;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0.4rem 1rem;
+    text-decoration: none;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    box-shadow: inset 5px 5px 10px #c43a7f,
+                inset -5px -5px 10px #ff7fc1;
+    transform: translateY(2px);
+}
+
 .menu {
     /* Cambiar para que el contenedor no limite el ancho */
     display: block;
@@ -63,6 +84,27 @@ nav ul li {
     transition: transform 0.3s ease;
     display: inline-block;
     margin: 0.5rem;
+}
+
+.productos button {
+    background: linear-gradient(145deg, #ff5dbc, #fc9bdc);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 5px 5px 10px #c43a7f,
+                -5px -5px 10px #ff7fc1;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 0.3rem 0.5rem;
+    padding: 0.6rem 1.2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.productos button:hover {
+    box-shadow: inset 5px 5px 10px #c43a7f,
+                inset -5px -5px 10px #ff7fc1;
+    transform: translateY(2px);
 }
 
 /* Hover effect for products */
