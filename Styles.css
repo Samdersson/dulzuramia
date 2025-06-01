@@ -30,11 +30,27 @@ nav ul li {
 }
 
 .menu {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    padding: 3rem 2rem;
-    flex-wrap: wrap;
+    /* Cambiar para que el contenedor no limite el ancho */
+    display: block;
+    padding: 1rem 0;
+    margin: 0;
+}
+
+.categoria-contenedor {
+    width: 100vw; /* Ocupa todo el ancho de la pantalla */
+    background-color: #f9f9f9;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+}
+
+.categoria-contenedor h1 {
+    margin: 0 0 1rem 0;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid #fc2bbd;
+    color: #fc2bbd;
+    font-size: 1.8rem;
+    text-align: center;
 }
 
 .productos {
@@ -45,8 +61,11 @@ nav ul li {
     width: 320px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
+    display: inline-block;
+    margin: 0.5rem;
 }
 
+/* Hover effect for products */
 .productos:hover {
     transform: translateY(-5px);
 }
