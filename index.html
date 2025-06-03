@@ -748,7 +748,25 @@
                 <button>Ver producto</button>
                 <button>Agregar al carrito</button>
             </div>
-        </section>
+</section>
     </div>
+
+    <!-- Botón para contacto WhatsApp -->
+    <a id="whatsappBtn" href="https://wa.me/3160941090" target="_blank" title="Contactar por WhatsApp" rel="noopener noreferrer">
+        <img src="Imagenes/iconos/WhatsApp.svg.webp" alt="WhatsApp" width="28" height="28" />
+    </a>
+
+    <!-- Botón para ir al inicio -->
+    <button id="scrollToTopBtn" title="Ir al inicio">↑</button>
+
+    <script>
+        // Obtener el botón de ir al inicio
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        // Agregar evento click para desplazar hacia arriba suavemente
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
