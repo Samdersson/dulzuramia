@@ -11,11 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Get product name (h1)
             const productName = productDiv.querySelector('h1')?.innerText || 'Producto';
 
-            // Get price (p containing "Precio")
+            // Get price (p containing price)
             let price = '';
             const priceParagraphs = productDiv.querySelectorAll('p');
             priceParagraphs.forEach(p => {
-                if (p.innerText.toLowerCase().includes('precio')) {
+                if (p.innerText.trim().match(/^\$\d/)) {
                     price = p.innerText.trim();
                 }
             });
@@ -37,14 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Construct the message
             let message = `Hola, quiero ordenar:\n- ${productName}`;
             if (optionText) {
-                message += `\n   ${optionText}`;
+                message += `\n  Opción: ${optionText}`;
             }
             if (price) {
-                message += `\n- ${price}`;
+                message += `\n- Precio: ${price}`;
             }
 
             // WhatsApp number (from the existing link in index.html)
-            const whatsappNumber = '+573160941090';
+            const whatsappNumber = '3160941090';
 
             // Encode the message for URL
             const encodedMessage = encodeURIComponent(message);
@@ -54,4 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
             window.open(whatsappUrl, '_blank');
         });
     });
+
+    // Cart button functionality placeholder
+    const cartBtn = document.getElementById('cartBtn');
+    if (cartBtn) {
+        cartBtn.addEventListener('click', () => {
+            alert('Funcionalidad del carrito aún no implementada.');
+        });
+    }
 });
