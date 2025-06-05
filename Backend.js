@@ -31,13 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let message = `Hola, quiero ordenar:\n- ${productName}`;
             if (optionText) {
-                message += `\n  Opción: ${optionText}`;
+                message += `\n  ${optionText}`;
             }
             if (price) {
                 message += `\n- Precio: ${price}`;
             }
 
-            const whatsappNumber = '3160941090';
+            const whatsappNumber = '+573160941090';
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
             window.open(whatsappUrl, '_blank');
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 optionText = label ? label.innerText.trim() : selectedRadio.value;
             }
 
-            // Check if product already in cart with same option
+            
             const existingIndex = cart.findIndex(item => item.name === productName && item.option === optionText);
             if (existingIndex !== -1) {
                 cart[existingIndex].quantity += 1;
@@ -83,11 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 cart.push({ name: productName, price: price, option: optionText, quantity: 1 });
             }
             localStorage.setItem('cart', JSON.stringify(cart));
-            alert(`Producto agregado al carrito:\n${productName}${optionText ? '\nOpción: ' + optionText : ''}\n${price}`);
+            alert(`Producto agregado al carrito:\n${productName}${optionText ? '\n' + optionText : ''}\n${price}`);
         });
     });
 
-    // Cart modal elements
+    // Cart modal 
     const cartBtn = document.getElementById('cartBtn');
     const cartModal = document.createElement('div');
     cartModal.id = 'cartModal';
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cartModal.appendChild(closeModalBtn);
     cartModal.appendChild(cartItemsList);
 
-    // Continue purchase button
+    // Continue comprando button
     const continueBtn = document.createElement('button');
     continueBtn.innerText = 'Continuar compra';
     continueBtn.style.marginTop = '10px';
@@ -207,16 +207,16 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('El carrito está vacío.');
             return;
         }
-        let message = 'Hola, quiero ordenar:\n';
+        let message = 'Hola, Dulzura Mía deseo ordenar:\n';
         cart.forEach(item => {
-            message += `- ${item.name}`;
+            message += ` -  ${item.quantity}`;
             if (item.option) {
                 message += ` (${item.option})`;
             }
-            message += ` x${item.quantity}\n`;
+            message += ` ${item.name}\n`;
         });
 
-        const whatsappNumber = '3160941090';
+        const whatsappNumber = '+573160941090';
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
         window.open(whatsappUrl, '_blank');
