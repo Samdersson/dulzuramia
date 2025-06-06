@@ -202,11 +202,134 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Continue purchase button click
+    // Order details modal creation
+    const orderDetailsModal = document.createElement('div');
+    orderDetailsModal.id = 'orderDetailsModal';
+    orderDetailsModal.style.position = 'fixed';
+    orderDetailsModal.style.top = '50%';
+    orderDetailsModal.style.left = '50%';
+    orderDetailsModal.style.transform = 'translate(-50%, -50%)';
+    orderDetailsModal.style.backgroundColor = 'white';
+    orderDetailsModal.style.padding = '20px';
+    orderDetailsModal.style.borderRadius = '10px';
+    orderDetailsModal.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+    orderDetailsModal.style.zIndex = '11000';
+    orderDetailsModal.style.display = 'none';
+    orderDetailsModal.style.maxHeight = '80vh';
+    orderDetailsModal.style.overflowY = 'auto';
+    orderDetailsModal.style.width = '90vw';
+    orderDetailsModal.style.maxWidth = '500px';
+
+    const closeOrderModalBtn = document.createElement('button');
+    closeOrderModalBtn.innerText = 'Cerrar';
+    closeOrderModalBtn.style.marginBottom = '10px';
+    closeOrderModalBtn.addEventListener('click', () => {
+        orderDetailsModal.style.display = 'none';
+    });
+
+    const orderForm = document.createElement('form');
+    orderForm.id = 'orderForm';
+
+    // Recipient name input
+    const nameLabel = document.createElement('label');
+    nameLabel.innerText = 'Nombre de quien recibe:';
+    nameLabel.htmlFor = 'recipientName';
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.id = 'recipientName';
+    nameInput.name = 'recipientName';
+    nameInput.required = true;
+    nameInput.style.width = '100%';
+    nameInput.style.marginBottom = '10px';
+
+    // Address input
+    const addressLabel = document.createElement('label');
+    addressLabel.innerText = 'Dirección:';
+    addressLabel.htmlFor = 'address';
+    const addressInput = document.createElement('textarea');
+    addressInput.id = 'address';
+    addressInput.name = 'address';
+    addressInput.required = true;
+    addressInput.style.width = '100%';
+    addressInput.style.marginBottom = '10px';
+    addressInput.rows = 3;
+
+    // Payment method input
+    const paymentLabel = document.createElement('label');
+    paymentLabel.innerText = 'Método de pago:';
+    paymentLabel.htmlFor = 'paymentMethod';
+
+    const paymentCashLabel = document.createElement('label');
+    paymentCashLabel.innerText = 'Efectivo';
+    paymentCashLabel.style.marginRight = '10px';
+    const paymentCashInput = document.createElement('input');
+    paymentCashInput.type = 'radio';
+    paymentCashInput.id = 'paymentCash';
+    paymentCashInput.name = 'paymentMethod';
+    paymentCashInput.value = 'Efectivo';
+    paymentCashInput.required = true;
+
+    const paymentTransferLabel = document.createElement('label');
+    paymentTransferLabel.innerText = 'Transferencia';
+    const paymentTransferInput = document.createElement('input');
+    paymentTransferInput.type = 'radio';
+    paymentTransferInput.id = 'paymentTransfer';
+    paymentTransferInput.name = 'paymentMethod';
+    paymentTransferInput.value = 'Transferencia';
+
+    // Append payment inputs
+    const paymentDiv = document.createElement('div');
+    paymentDiv.style.marginBottom = '10px';
+    paymentDiv.appendChild(paymentCashInput);
+    paymentDiv.appendChild(paymentCashLabel);
+    paymentDiv.appendChild(paymentTransferInput);
+    paymentDiv.appendChild(paymentTransferLabel);
+
+    // Submit button
+    const submitBtn = document.createElement('button');
+    submitBtn.type = 'submit';
+    submitBtn.innerText = 'Confirmar pedido';
+    submitBtn.style.backgroundColor = '#25D366';
+    submitBtn.style.color = 'white';
+    submitBtn.style.border = 'none';
+    submitBtn.style.borderRadius = '5px';
+    submitBtn.style.padding = '10px 20px';
+    submitBtn.style.cursor = 'pointer';
+
+    // Append all to form
+    orderForm.appendChild(nameLabel);
+    orderForm.appendChild(nameInput);
+    orderForm.appendChild(addressLabel);
+    orderForm.appendChild(addressInput);
+    orderForm.appendChild(paymentLabel);
+    orderForm.appendChild(paymentDiv);
+    orderForm.appendChild(submitBtn);
+
+    orderDetailsModal.appendChild(closeOrderModalBtn);
+    orderDetailsModal.appendChild(orderForm);
+    document.body.appendChild(orderDetailsModal);
+
     continueBtn.addEventListener('click', () => {
         if (cart.length === 0) {
             alert('El carrito está vacío.');
             return;
         }
+        // Show order details modal
+        orderDetailsModal.style.display = 'block';
+    });
+
+    orderForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const recipientName = nameInput.value.trim();
+        const address = addressInput.value.trim();
+        const paymentMethod = orderForm.paymentMethod.value;
+
+        if (!recipientName || !address || !paymentMethod) {
+            alert('Por favor, complete todos los campos.');
+            return;
+        }
+
         let message = 'Hola, Dulzura Mía deseo ordenar:\n';
         cart.forEach(item => {
             message += ` -  ${item.quantity}`;
@@ -215,10 +338,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             message += ` ${item.name}\n`;
         });
+        message += `\nNombre de quien recibe: ${recipientName}`;
+        message += `\nDirección: ${address}`;
+        message += `\nMétodo de pago: ${paymentMethod}`;
 
         const whatsappNumber = '+573160941090';
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+        // Close modals
+        orderDetailsModal.style.display = 'none';
+        cartModal.style.display = 'none';
+
         window.open(whatsappUrl, '_blank');
     });
 

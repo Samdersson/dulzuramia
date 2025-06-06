@@ -324,8 +324,7 @@ footer {
     transform: translateY(-2px);
 }
 
-/* Estilos para el modal del carrito
-#cartModal {
+#orderDetailsModal {
     background-color: white;
     border-radius: 20px;
     padding: 1.5rem;
@@ -338,12 +337,12 @@ footer {
     color: #333;
 }
 
-#cartModal button {
-    background: linear-gradient(145deg, #ff5dbc, #fc9bdc);
+#orderDetailsModal button {
+    background: linear-gradient(145deg, #25D366, #128C7E);
     border: none;
     border-radius: 12px;
-    box-shadow: 5px 5px 10px #c43a7f,
-                -5px -5px 10px #ff7fc1;
+    box-shadow: 5px 5px 10px #128C7E,
+                -5px -5px 10px #25D366;
     color: white;
     cursor: pointer;
     font-weight: bold;
@@ -353,37 +352,39 @@ footer {
     transition: all 0.3s ease;
 }
 
-#cartModal button:hover {
-    box-shadow: inset 5px 5px 10px #c43a7f,
-                inset -5px -5px 10px #ff7fc1;
+#orderDetailsModal button:hover {
+    box-shadow: inset 5px 5px 10px #128C7E,
+                inset -5px -5px 10px #25D366;
     transform: translateY(2px);
 }
 
-#cartModal div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+#orderDetailsModal label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+}
+
+#orderDetailsModal input[type="text"],
+#orderDetailsModal textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+#orderDetailsModal textarea {
+    resize: vertical;
+}
+
+#orderDetailsModal div {
     margin-bottom: 1rem;
 }
 
-#cartModal input[type="number"] {
-    width: 50px;
-    margin: 0 10px;
-    border-radius: 12px;
-    border: 1px solid #ccc;
-    padding: 0.3rem;
-    font-size: 1rem;
+#orderDetailsModal input[type="radio"] {
+    margin-right: 0.3rem;
+    vertical-align: middle;
 }
-
-#cartModal ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-#cartModal p {
-    font-size: 1rem;
-    margin: 1rem 0;
-}
-
- */
