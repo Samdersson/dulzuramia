@@ -40,8 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const whatsappNumber = '+573160941090';
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-            window.open(whatsappUrl, '_blank');
-        });
+        window.open(whatsappUrl, '_blank');
+
+        // Clear cart after sending order
+        cart = [];
+        localStorage.setItem('cart', JSON.stringify(cart));
+    });
     });
 
     // Cart functionality
