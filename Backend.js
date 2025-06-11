@@ -29,12 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 optionText = label ? label.innerText.trim() : selectedRadio.value;
             }
 
-            let message = `Hola, quiero ordenar:\n- ${productName}`;
+            let message = `Hola, me gustaria ordenar:\n- ${productName}`;
             if (optionText) {
                 message += `\n  ${optionText}`;
             }
             if (price) {
                 message += `\n- Precio: ${price}`;
+        
             }
 
             const whatsappNumber = '+573160941090';
