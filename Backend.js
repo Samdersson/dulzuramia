@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get all "Ordenar" buttons
     const orderButtons = document.querySelectorAll('.productos > button:nth-of-type(1)');
 
+    let currentOrderType = '';
+    let singleProduct = null;
+
     orderButtons.forEach(button => {
         button.addEventListener('click', () => {
             const productDiv = button.closest('.productos');
@@ -29,23 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 optionText = label ? label.innerText.trim() : selectedRadio.value;
             }
 
-            let message = `Hola, quiero ordenar:\n- ${productName}`;
-            if (optionText) {
-                message += `\n  ${optionText}`;
-            }
-            if (price) {
-                message += `\n- Precio: ${price}`;
-            }
+            currentOrderType = 'single';
+            singleProduct = { name: productName, option: optionText, price: price };
 
-            const whatsappNumber = '+573160941090';
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-        window.open(whatsappUrl, '_blank');
-
-        // Clear cart after sending order
-        cart = [];
-        localStorage.setItem('cart', JSON.stringify(cart));
-    });
+            // Show order details modal for single product order
+            orderDetailsModal.style.display = 'block';
+        });
     });
 
     // Cart functionality
@@ -236,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Recipient name input
     const nameLabel = document.createElement('label');
-    nameLabel.innerText = 'Nombre de quien recibe:';
+    nameLabel.innerText = 'Nombre y Telefono de quien recibe:';
     nameLabel.htmlFor = 'recipientName';
     const nameInput = document.createElement('input');
     nameInput.type = 'text';
@@ -334,15 +326,27 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        let message = 'Hola, Dulzura Mía deseo ordenar:\n';
-        cart.forEach(item => {
-            message += ` -  ${item.quantity}`;
-            if (item.option) {
-                message += ` (${item.option})`;
+        let message = '';
+        if (currentOrderType === 'cart') {
+            message = 'Hola, Dulzura Mía deseo ordenar:\n';
+            cart.forEach(item => {
+                message += ` -  ${item.quantity}`;
+                if (item.option) {
+                    message += ` (${item.option})`;
+                }
+                message += ` ${item.name}\n`;
+            });
+        } else if (currentOrderType === 'single') {
+            message = `Hola, quiero ordenar:\n- ${singleProduct.name}`;
+            if (singleProduct.option) {
+                message += `\n  ${singleProduct.option}`;
             }
-            message += ` ${item.name}\n`;
-        });
-        message += `\nNombre de quien recibe: ${recipientName}`;
+            if (singleProduct.price) {
+                message += `\n- Precio: ${singleProduct.price}`;
+            }
+        }
+
+        message += `\nNombre y telefono de quien recibe: ${recipientName}`;
         message += `\nDirección: ${address}`;
         message += `\nMétodo de pago: ${paymentMethod}`;
 
@@ -352,7 +356,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Close modals
         orderDetailsModal.style.display = 'none';
-        cartModal.style.display = 'none';
+        if (currentOrderType === 'cart') {
+            cartModal.style.display = 'none';
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
 
         window.open(whatsappUrl, '_blank');
     });
