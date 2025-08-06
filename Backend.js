@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 optionText = label ? label.innerText.trim() : selectedRadio.value;
             }
 
-            
             const existingIndex = cart.findIndex(item => item.name === productName && item.option === optionText);
             if (existingIndex !== -1) {
                 cart[existingIndex].quantity += 1;
@@ -197,7 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cartModal.style.display = 'block';
     });
 
-    // Continue purchase button click
     // Order details modal creation
     const orderDetailsModal = document.createElement('div');
     orderDetailsModal.id = 'orderDetailsModal';
@@ -305,16 +303,8 @@ document.addEventListener('DOMContentLoaded', () => {
     orderDetailsModal.appendChild(orderForm);
     document.body.appendChild(orderDetailsModal);
 
-    continueBtn.addEventListener('click', () => {
-        if (cart.length === 0) {
-            alert('El carrito está vacío.');
-            return;
-        }
-        // Show order details modal
-        orderDetailsModal.style.display = 'block';
-    });
-
-    orderForm.addEventListener('submit', (e) => {
+    // Handle form submission for both single product and cart
+    orderForm.addEventListener('submit', function handleFormSubmit(e) {
         e.preventDefault();
 
         const recipientName = nameInput.value.trim();
@@ -327,28 +317,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         let message = '';
+
         if (currentOrderType === 'cart') {
-            message = 'Hola, Dulzura Mía deseo ordenar:\n';
+            message = 'Hola, Soy un DulzuraLover y deseo ordenar:\n\n';
             cart.forEach(item => {
-                message += ` -  ${item.quantity}`;
+                message += `• ${item.quantity}x ${item.name}`;
                 if (item.option) {
                     message += ` (${item.option})`;
                 }
-                message += ` ${item.name}\n`;
+                message += ` - ${item.price}\n`;
             });
-        } else if (currentOrderType === 'single') {
-            message = `Hola, quiero ordenar:\n- ${singleProduct.name}`;
+        } else if (currentOrderType === 'single' && singleProduct) {
+            message = `Hola, quiero ordenar:\n• 1x ${singleProduct.name}`;
             if (singleProduct.option) {
-                message += `\n  ${singleProduct.option}`;
+                message += ` (${singleProduct.option})`;
             }
             if (singleProduct.price) {
-                message += `\n- Precio: ${singleProduct.price}`;
+                message += ` - ${singleProduct.price}`;
             }
+            message += '\n';
         }
 
-        message += `\nNombre y telefono de quien recibe: ${recipientName}`;
-        message += `\nDirección: ${address}`;
-        message += `\nMétodo de pago: ${paymentMethod}`;
+        message += `\n INFORMACION DEL DOMICILIO \n`;
+        message += ` Nombre y teléfono: ${recipientName}\n`;
+        message += ` Dirección: ${address}\n`;
+        message += ` Método de pago: ${paymentMethod}`;
 
         const whatsappNumber = '+573160941090';
         const encodedMessage = encodeURIComponent(message);
@@ -365,10 +358,23 @@ document.addEventListener('DOMContentLoaded', () => {
         window.open(whatsappUrl, '_blank');
     });
 
+    continueBtn.addEventListener('click', () => {
+        if (cart.length === 0) {
+            alert('El carrito está vacío.');
+            return;
+        }
+        
+        currentOrderType = 'cart';
+        orderDetailsModal.style.display = 'block';
+    });
+
     // Close modal when clicking outside modal content
     window.addEventListener('click', (event) => {
         if (event.target === cartModal) {
             cartModal.style.display = 'none';
+        }
+        if (event.target === orderDetailsModal) {
+            orderDetailsModal.style.display = 'none';
         }
     });
 
