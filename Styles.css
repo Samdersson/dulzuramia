@@ -388,3 +388,10 @@ footer {
     margin-right: 0.3rem;
     vertical-align: middle;
 }
+
+#video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+}
