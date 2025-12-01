@@ -3,6 +3,28 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f2f4f8;
     color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para el GIF de Navidad */
+.navidad-gif {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /*z-index: -1; /* Detrás de todo el contenido */
+    pointer-events: none; /* No interfiere con clics */
+    overflow: hidden;
+}
+
+.navidad-gif img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.1; /* Ajusta la opacidad para que no distraiga */
 }
 
 header {
@@ -11,6 +33,12 @@ header {
     text-align: center;
     color: white;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    width: 90%;
+    margin: auto;
+    margin-top: 2rem;
+
 }
 
 header h1 {
@@ -59,6 +87,7 @@ nav ul li a:hover {
     padding: 1rem 0;
     margin: 0;
 }
+
 
 .categoria-contenedor {
     width: 100vw; /* Ocupa todo el ancho de la pantalla */
@@ -190,13 +219,17 @@ nav ul li a:hover {
 }
 
 footer {
-    background-color: #ff4794;
+    background: linear-gradient(to right, #fc9bdc, #ff5dbc);
+    border-radius: 10px 10px 50px 50px ;
     color: white;
     text-align: center;
     padding: 1rem;
-    position: relative;
+    position: center;
     bottom: 10;
-    width: 100%;
+    width: 90%;
+    margin: auto;
+    margin-top: 2rem;
+    
 }
 
 /* Added styles for centering container and logo image */
@@ -394,4 +427,136 @@ footer {
     justify-content: center;
     align-items: center;
     padding: 2rem 0;
+}
+
+main {
+    flex-grow: 1;
+}
+
+
+#section-galeria {
+
+    background-color: var(--awb-color2); /* rgba(249,249,251,1) - Color muy claro */
+
+    padding: var(--main_padding-top) var(--hundredp_padding) var(--main_padding-bottom);
+    text-align: center; /* Centra el título */
+    margin-top: 50px; /* Separación superior */
+    margin-bottom: 50px; /* Separación inferior */
+    margin: auto;
+    width: 90%;
+}
+#section-galeria h2 {
+    font-size: 2.5rem;
+    color: var(--awb-color7); 
+    margin-bottom: 40px; 
+}
+.gallery {
+    display: grid;
+   
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px; /* Espacio entre las imágenes (separación) */
+    max-width: var(--site_width); /* Limita el ancho de la galería */
+    margin: 0 auto; /* Centra el contenedor de la galería dentro de la sección */
+}
+
+
+.gallery img {
+    
+    display: block; 
+    width: 100%;
+    margin: auto;
+    height: auto;
+    object-fit: cover; 
+    aspect-ratio: 1 / 1; 
+
+    
+    border-radius: 10px; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+    cursor: pointer; 
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+
+.gallery img:hover {
+    transform: scale(1.05); /* Efecto de zoom sutil y moderno */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al interactuar */
+    z-index: 10; /* Asegura que la imagen en hover esté sobre las demás */
+}
+
+/* Estilos para la página de contacto */
+#contacto-info, #redes-sociales, #horarios {
+    background-color: #f9f9f9;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+#contacto-info h2, #redes-sociales h2, #horarios h2 {
+    color: #fc2bbd;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.contact-container, .social-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.contact-item, .social-link {
+    background-color: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+}
+
+.contact-item:hover, .social-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.contact-link {
+    text-decoration: none;
+    color: #fc2bbd;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contact-link img {
+    border-radius: 50%;
+    border: 2px solid #fc2bbd;
+}
+
+.social-link img {
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+}
+
+#horarios {
+    background: linear-gradient(to right, #fc9bdc, #ff5dbc);
+    color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+#horarios p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
 }
