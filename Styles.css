@@ -15,7 +15,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    /*z-index: -1; /* Detrás de todo el contenido */
+    z-index: -1; /* Detrás de todo el contenido */
     pointer-events: none; /* No interfiere con clics */
     overflow: hidden;
     margin: auto;
