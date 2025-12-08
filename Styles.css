@@ -119,9 +119,9 @@ nav ul li a:hover {
     padding: 1rem 2rem;
     margin-bottom: 2rem;
     box-sizing: border-box;
-    display: flex;
+    display: center;
     justify-content: center;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     text-align: center;
     
 }
@@ -145,7 +145,7 @@ nav ul li a:hover {
     display: inline-block;
     margin: 0.5rem;
     /* height: 400px; */
-    position: center;
+    align-items: center;
 }
 
 .productos button {
@@ -272,10 +272,11 @@ footer {
 }
 
 .logo {
-  display: flex;
+  display: center;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  margin-top: 20px
 }
 
 .logo-image {
