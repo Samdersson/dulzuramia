@@ -108,11 +108,13 @@ nav ul li a:hover {
     display: block;
     padding: 1rem 0;
     margin: 0;
+    position: center;
+    
 }
 
 
 .categoria-contenedor {
-    width: 90vw; /* Ocupa todo el ancho de la pantalla */
+    width: 100%; /* Ocupa todo el ancho de la pantalla */
     background-color: #f9f9f9;
     padding: 1rem 2rem;
     margin-bottom: 2rem;
@@ -121,6 +123,7 @@ nav ul li a:hover {
     justify-content: center;
     flex-wrap: wrap;
     text-align: center;
+    
 }
 
 .categoria-contenedor h1 {
@@ -132,7 +135,7 @@ nav ul li a:hover {
 }
 
 .productos {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     border-radius: 20px;
     padding: 1.5rem;
     text-align: center;
@@ -142,6 +145,7 @@ nav ul li a:hover {
     display: inline-block;
     margin: 0.5rem;
     /* height: 400px; */
+    position: center;
 }
 
 .productos button {
