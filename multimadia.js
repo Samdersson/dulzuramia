@@ -6,12 +6,17 @@ const embedHTML = `
       data-instgrm-version="14" 
       style="width:100%; max-width:500px; margin:auto;">
   </blockquote>
+
 `;
+
 
 document.getElementById("video-container").innerHTML = embedHTML;
 
 // Ahora añadimos el script dinámicamente
 const script = document.createElement("script");
 script.src = "//www.instagram.com/embed.js";
+
 script.async = true;
 document.body.appendChild(script);
+
+
