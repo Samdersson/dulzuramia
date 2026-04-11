@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="Styles.css">
-    <link rel="icon" href="Imagenes\Logo DM.png" type="image/x-icon">
+    <link rel="stylesheet" href="Styles-clean.css">
+    <link rel="icon" href="Imagenes\\DM.jpg" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dulzura Mia | Reposteria | Brunch</title>
 
@@ -12,59 +12,51 @@
     <meta name="author" content="Dulzura Mia">
 </head>
 <body>
-    <header>
+<header class="hero">
         <div class="logo-container">
-            <img src="Imagenes/Logo DM.png" alt="Logo Dulzura Mía" width="80" height="80" class="logo">
+            <img src="Imagenes\\DM.jpg" alt="Logo Dulzura Mía" width="80" height="80" class="logo">
         </div>
-        <h1 style="font-style: italic; font-family: 'Times New Roman', serif;">Bienvenidos Dulzura Lovers</h1>
+<h1 class="hero-title">Bienvenidos Dulzura Lovers</h1>
         <p>En Dulzura Mia, nos especializamos en ofrecer una deliciosa variedad de productos de repostería y brunch. <br> Ya sea que busques un dulce capricho u otro tipo de plato para comenzar tu día, tenemos algo para todos los gustos.</p>
         <nav>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="productos.html">Productos</a></li>
+                <li><a href="index.html">Productos</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
             </ul>
         </nav>
     </header>
-
-    
 
     <main>
         <section id="section-galeria">
             <h2>SELCCIONA TU ANTOJO</h2>
             <h3> y nosotros te llevamos a la categoria</h3>
             <div class="gallery">
-                <a href="index.html#reposteria">
-                    <img src="Imagenes/reposteria/red velvet.png" alt="Torta Red Velvet">
+            <a href="index.html#reposteria" aria-label="Explorar Reposteria" data-category="Reposteria">                  <img src="Imagenes/reposteria/red velvet.png" alt="Reposteria - Torta Red Velvet" loading="lazy">
                 </a>
-                <a href="index.html#reposteria">
-                    <img src="Imagenes/reposteria/quipitos.jpg" alt="Quipitos">
+            <a href="index.html#reposteria" aria-label="Explorar Reposteria" data-category="Reposteria">                    <img src="Imagenes/reposteria/quipitos.jpg" alt="Reposteria - Quipitos" loading="lazy">
                 </a>
-                <a href="index.html#bebidas_frias">
-                    <img src="Imagenes/bebidas_frias/Iced Frutos del bosque.png" alt="Iced Frutos del Bosque">
-                </a>
-                <a href="index.html#platos_fuertes">
-                    <img src="Imagenes/platos_fuertes/especial_dulzura_mia.png" alt="Especial Dulzura Mía">
-                </a>
-                <a href="index.html#otros_platos">
-                    <img src="Imagenes\otros_platos\hamburguesa.png" alt="Combo de Hamburguesa Artesanal">
-                </a>
-                <a href="index.html">
-                    <img src="Imagenes\varios_productos.png" alt="dulzura mia">
-            </div>
+            <a href="index.html#bebidas_frias" aria-label="Explorar Bebidas Frias" data-category="Bebidas Frias">                    <img src="Imagenes/bebidas_frias/Iced Frutos del bosque.png" alt="Bebidas Frias - Iced Frutos del Bosque" loading="lazy">                </a>
+            <a href="index.html#platos_fuertes" aria-label="Explorar Platos Fuertes" data-category="Platos Fuertes">                    <img src="Imagenes/platos_fuertes/especial_dulzura_mia.png" alt="Platos Fuertes - Especial Dulzura Mia" loading="lazy">                </a>
+            <a href="index.html#otros_platos" aria-label="Explorar Otros Platos" data-category="Otros Platos">                    <img src="Imagenes/otros_platos/hamburguesa.png" alt="Otros Platos - Hamburguesa" loading="lazy">                </a>
+            <a href="index.html" aria-label="Ver Todos los Productos" data-category="Todos los Productos">                  <img src="Imagenes/varios_productos.png" alt="Todos los Productos" loading="lazy">            </div>
         </section>
     </main>
     
-    <section id="ubicacion">
-        <h2>Como llegar</h2>
-        <div class="mapa-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3978.4327393221647!2d-75.83283872997262!3d4.329542435163445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38537b7fa01a93%3A0x3f2b65d3abdc179e!2sDulzura%20m%C3%ADa%20reposteria%20y%20brunch!5e0!3m2!1ses!2sco!4v1765761316637!5m2!1ses!2sco"
-             width="600" height="450" style="border:0;" 
-             allowfullscreen="" loading="lazy" 
-             referrerpolicy="no-referrer-when-downgrade">
+    <section id="map-container" class="map-section">
+        <h2>Cómo llegar al rincón más dulce de Caicedonia</h2>
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3978.4327393221647!2d-75.83283872997262!3d4.329542435163445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38537b7fa01a93%3A0x3f2b65d3abdc179e!2sDulzura%20m%C3%ADa%20reposteria%20y%20brunch!5e0!3m2!1ses!2sco!4v1765761316637!5m2!1ses!2sco" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                aria-label="Mapa de ubicación de Dulzura Mía en Caicedonia"
+                title="Ubicación de Dulzura Mía - Repostería y Brunch">
             </iframe>
-            
         </div>
+    </section>
 
     <footer>
         <p>&copy; 2025 Dulzura Mía. Todos los derechos reservados.</p>

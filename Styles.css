@@ -324,12 +324,17 @@ footer {
     transform: translateY(-2px);
 }
 
-#mapa-container {
+.map-section {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 2rem 0;
-    
+    width: 100%;
+}
+
+.map-container {
+    position: relative;
 }
 
 /* Estilos para el botón de contacto WhatsApp */
