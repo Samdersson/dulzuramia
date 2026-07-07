@@ -50,7 +50,60 @@
 
         <section class="menu">
 
+            <div style="text-align:center; margin: 1rem 0;">
+                <button id="btnAbrirPedidoRapido" type="button" style="background: linear-gradient(145deg, #ff5dbc, #fc9bdc); border:none; border-radius: 12px; box-shadow: 5px 5px 10px #c43a7f, -5px -5px 10px #ff7fc1; color:white; cursor:pointer; font-weight:bold; padding: 0.6rem 1.2rem;">
+                    Pedido rápido (buscar y armar)
+                </button>
+            </div>
+
+            <!-- Pedido rápido para meseros -->
+            <div id="pedidoRapido" class="pedido-rapido" style="display:none;">
+                <h2>Crear Pedido por mesa</h2>
+
+
+                <div class="pedido-rapido-row" style="margin-bottom: 1rem;">
+                    <input id="buscadorProductos" type="text" placeholder="Buscar producto por nombre..." autocomplete="off" />
+                    <button id="btnBuscar" type="button" style="background: linear-gradient(145deg, #ff5dbc, #fc9bdc); border:none; border-radius: 12px; color:white; cursor:pointer; font-weight:bold; padding: 0.6rem 1.2rem;">
+                        Buscar
+                    </button>
+                </div>
+
+                <div id="resultadosBusqueda" class="resultados-busqueda" style="display:inline-block; background: linear-gradient(145deg, #ff5dbc, #fc9bdc) ; border-radius: 12px;color:white; cursor:pointer; font-weight:bold; padding: 0.6rem 1.2rem"></div>
+
+                <div id="detalleSeleccion" class="detalle-seleccion" style="display:none;">
+                    <div class="detalle-seleccion-header">
+                        <strong id="detalleNombre">Producto</strong>
+                        <span id="detallePrecio" class="detalle-precio"></span>
+                    </div>
+
+                    <div class="pedido-rapido-row">
+                        <label>Cantidad:</label>
+                        <input id="detalleCantidad" type="number" min="1" value="1" style="width:90px;" />
+                    </div>
+
+                    <div id="detalleEspecificaciones" class="detalle-especificaciones"></div>
+
+                    <button id="btnAgregarPedidoRapido" type="button" style="background: linear-gradient(145deg, #ff5dbc, #fc9bdc); border:none; border-radius: 12px; box-shadow: 5px 5px 10px #c43a7f, -5px -5px 10px #ff7fc1; color:white; cursor:pointer; font-weight:bold; padding: 0.6rem 1.2rem;">
+                        Agregar al pedido
+                    </button>
+                </div>
+
+                <div class="pedido-rapido-footer">
+                    <div class="pedido-rapido-row" style="margin-top: 1rem; font-weight:bold;">
+                        <label>Mesa Numero:</label>
+                        <input id="numeroMesa" type="text" placeholder="Número de mesa" style="flex:1;" />
+                    </div>
+                    <div class="pedido-total" style="margin-top: 1rem; font-weight:bold;">
+                        Valor Total: <span id="pedidoTotal">$0</span>
+                    </div>
+                    <button id="btnConfirmarPedidoRapido" type="button" style="background: linear-gradient(145deg, #ff5dbc, #fc9bdc); border:none; border-radius: 12px;  color:white; cursor:pointer; font-weight:bold; padding: 0.6rem 1.2rem;">
+                        Confirmar pedido (WhatsApp)
+                    </button>
+                </div>
+            </div>
+
             <div class="categoria-contenedor" id="brunch">
+
                 <h1>NUESTRO BRUNCH</h1>
             </div>
                 <!-- <div class="productos">

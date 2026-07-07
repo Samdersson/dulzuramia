@@ -5,6 +5,269 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentOrderType = '';
     let singleProduct = null;
 
+    // ===== Pedido rápido (abrir/cerrar) =====
+    const btnAbrirPedidoRapido = document.getElementById('btnAbrirPedidoRapido');
+    if (btnAbrirPedidoRapido) {
+        btnAbrirPedidoRapido.addEventListener('click', () => {
+            const el = document.getElementById('pedidoRapido');
+            if (el) el.style.display = 'block';
+            // Enfocar buscador
+            setTimeout(() => {
+                const b = document.getElementById('buscadorProductos');
+                if (b) b.focus();
+            }, 50);
+        });
+    }
+
+    // ===== Pedido rápido (buscar por nombre + especificaciones) =====
+    const buscadorProductos = document.getElementById('buscadorProductos');
+
+    const btnBuscar = document.getElementById('btnBuscar');
+    const resultadosBusqueda = document.getElementById('resultadosBusqueda');
+
+    const detalleSeleccion = document.getElementById('detalleSeleccion');
+    const detalleNombre = document.getElementById('detalleNombre');
+    const detallePrecio = document.getElementById('detallePrecio');
+    const detalleCantidad = document.getElementById('detalleCantidad');
+    const detalleEspecificaciones = document.getElementById('detalleEspecificaciones');
+
+    const btnAgregarPedidoRapido = document.getElementById('btnAgregarPedidoRapido');
+    const numeroMesaInput = document.getElementById('numeroMesa');
+    const pedidoTotalEl = document.getElementById('pedidoTotal');
+    const btnConfirmarPedidoRapido = document.getElementById('btnConfirmarPedidoRapido');
+
+    let pedidoRapidoTotal = 0;
+
+    // Catálogo: índice de productos desde el DOM
+    function getPriceTextFromProduct(productDiv) {
+        let priceText = '';
+        const ps = productDiv.querySelectorAll('p');
+        ps.forEach(p => {
+            const t = (p.innerText || '').trim();
+            if (t.match(/^\$\d/)) priceText = t;
+        });
+        if (!priceText) {
+            const h3s = productDiv.querySelectorAll('h3');
+            h3s.forEach(h3 => {
+                const t = (h3.innerText || '').trim();
+                if (t.match(/\$\s*\d/)) priceText = t.replace(/\s+/g, '');
+            });
+        }
+        return priceText;
+    }
+
+    function parseMoney(priceText) {
+        if (!priceText) return 0;
+        // Extrae números
+        const digits = (priceText.match(/\d[\d\.]*/g) || []).join('');
+        const n = parseInt(digits.replace(/\./g, ''), 10);
+        return isNaN(n) ? 0 : n;
+    }
+
+    function getOptionsRadiosFromProduct(productDiv) {
+        const form = productDiv.querySelector('form');
+        if (!form) return [];
+
+        const radios = Array.from(form.querySelectorAll('input[type="radio"]'));
+        if (!radios.length) return [];
+
+        // El valor + el texto visible del label suele incluir el precio
+        return radios.map(radio => {
+            const label = form.querySelector(`label > input[value="${radio.value}"]`)?.parentElement;
+            const text = label ? (label.innerText || '').trim() : radio.value;
+            return { value: radio.value, text };
+        });
+    }
+
+    function buildCatalog() {
+        const cards = Array.from(document.querySelectorAll('.productos'));
+        return cards.map((card, idx) => {
+            const name = card.querySelector('h1')?.innerText?.trim() || 'Producto';
+            const priceText = getPriceTextFromProduct(card);
+            const basePrice = parseMoney(priceText);
+            const options = getOptionsRadiosFromProduct(card);
+            return {
+                key: `${name}-${idx}`,
+                name,
+                priceText,
+                basePrice,
+                options
+            };
+        });
+    }
+
+    const catalog = buildCatalog();
+    let selectedProduct = null;
+
+    function renderResults(list) {
+        if (!resultadosBusqueda) return;
+        resultadosBusqueda.innerHTML = '';
+
+        if (!list.length) {
+            const empty = document.createElement('p');
+            empty.innerText = 'No se encontraron productos.';
+            resultadosBusqueda.appendChild(empty);
+            return;
+        }
+
+        list.forEach(item => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.style.display = 'block';
+            btn.style.width = '100%';
+            btn.style.margin = '6px 0';
+            btn.innerText = `${item.name} - ${item.priceText || '$0'}`;
+            btn.addEventListener('click', () => {
+                selectedProduct = item;
+                detalleNombre.innerText = item.name;
+                detallePrecio.innerText = item.priceText || '$0';
+
+                detalleCantidad.value = 1;
+
+                detalleEspecificaciones.innerHTML = '';
+                if (item.options && item.options.length) {
+                    const title = document.createElement('div');
+                    title.style.marginBottom = '8px';
+                    title.innerText = 'Especificaciones:';
+                    detalleEspecificaciones.appendChild(title);
+
+                    const group = document.createElement('div');
+                    group.id = 'pedidoRapidoGrupoEspecificaciones';
+
+                    item.options.forEach((opt, i) => {
+                        const label = document.createElement('label');
+                        label.style.display = 'block';
+                        label.style.cursor = 'pointer';
+
+                        const radio = document.createElement('input');
+                        radio.type = 'radio';
+                        radio.name = 'pedidoRapidoRadioEspecificacion';
+                        radio.value = opt.value;
+                        radio.id = `pedidoRapidoRadio_${i}`;
+                        if (i === 0) radio.checked = true;
+
+                        const span = document.createElement('span');
+                        span.innerText = ` ${opt.text}`;
+
+                        label.appendChild(radio);
+                        label.appendChild(span);
+                        group.appendChild(label);
+                    });
+
+                    detalleEspecificaciones.appendChild(group);
+                } else {
+                    const msg = document.createElement('p');
+                    msg.innerText = 'Sin especificaciones adicionales.';
+                    detalleEspecificaciones.appendChild(msg);
+                }
+
+                detalleSeleccion.style.display = 'block';
+            });
+
+            resultadosBusqueda.appendChild(btn);
+        });
+    }
+
+    function handleSearch() {
+        const q = (buscadorProductos.value || '').trim().toLowerCase();
+        if (!q) {
+            renderResults(catalog.slice(0, 20));
+            return;
+        }
+        const filtered = catalog
+            .filter(p => p.name.toLowerCase().includes(q))
+            .slice(0, 50);
+        renderResults(filtered);
+    }
+
+    if (btnBuscar && buscadorProductos) {
+        btnBuscar.addEventListener('click', handleSearch);
+        buscadorProductos.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') handleSearch();
+        });
+    }
+
+    if (btnAgregarPedidoRapido) {
+        btnAgregarPedidoRapido.addEventListener('click', () => {
+            if (!selectedProduct) {
+                alert('Selecciona un producto primero.');
+                return;
+            }
+
+            const qty = parseInt(detalleCantidad.value, 10);
+            if (isNaN(qty) || qty < 1) {
+                alert('Cantidad inválida.');
+                return;
+            }
+
+            let optionText = '';
+            if (selectedProduct.options && selectedProduct.options.length) {
+                const checked = document.querySelector('input[name="pedidoRapidoRadioEspecificacion"]:checked');
+                if (!checked) {
+                    alert('Debes seleccionar una especificación.');
+                    return;
+                }
+                const opt = selectedProduct.options.find(o => o.value === checked.value);
+                optionText = opt ? opt.text : checked.value;
+            }
+
+            // Agregar al carrito existente
+            const existingIndex = cart.findIndex(item => item.name === selectedProduct.name && item.option === optionText);
+            if (existingIndex !== -1) {
+                cart[existingIndex].quantity += qty;
+            } else {
+                cart.push({ name: selectedProduct.name, price: selectedProduct.priceText, option: optionText, quantity: qty });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Total sumatoria local (solo visual)
+            pedidoRapidoTotal += selectedProduct.basePrice * qty;
+            if (pedidoTotalEl) pedidoTotalEl.innerText = `$${pedidoRapidoTotal.toLocaleString('es-CO')}`;
+
+            alert(`Agregado: ${qty}x ${selectedProduct.name}${optionText ? ` (${optionText})` : ''}`);
+
+            // Mantener selección para seguir agregando otro producto
+            detalleSeleccion.style.display = 'none';
+        });
+    }
+
+    if (btnConfirmarPedidoRapido) {
+        btnConfirmarPedidoRapido.addEventListener('click', () => {
+            if (!numeroMesaInput || !numeroMesaInput.value.trim()) {
+                alert('Por favor ingresa el número de mesa.');
+                return;
+            }
+            if (!cart.length) {
+                alert('El pedido está vacío.');
+                return;
+            }
+
+            const mesa = numeroMesaInput.value.trim();
+
+            let message = 'Hola, Soy un DulzuraLover y deseo ordenar:\n\n';
+            cart.forEach(item => {
+                message += `• ${item.quantity}x ${item.name}`;
+                if (item.option) message += ` (${item.option})`;
+                message += ` - ${item.price}\n`;
+            });
+
+            message += `\n\n Número de mesa: ${mesa}`;
+
+            const whatsappNumber = '+573160941090';
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            // Cerrar carrito local
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            pedidoRapidoTotal = 0;
+            if (pedidoTotalEl) pedidoTotalEl.innerText = '$0';
+
+            window.open(whatsappUrl, '_blank');
+        });
+    }
+
+
     orderButtons.forEach(button => {
         button.addEventListener('click', () => {
             const productDiv = button.closest('.productos');
@@ -415,6 +678,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add event listeners to "Ver producto" buttons
     const viewProductButtons = document.querySelectorAll('.productos > button:nth-of-type(2)');
+
     viewProductButtons.forEach(button => {
         button.addEventListener('click', () => {
             const productDiv = button.closest('.productos');
