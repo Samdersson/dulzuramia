@@ -64,6 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return isNaN(n) ? 0 : n;
     }
 
+    function getOptionTextFromRadio(radio) {
+        if (!radio) return '';
+        const label = radio.closest('label');
+        return label ? (label.innerText || '').trim() : radio.value;
+    }
+
     function getOptionsRadiosFromProduct(productDiv) {
         const form = productDiv.querySelector('form');
         if (!form) return [];
@@ -73,8 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // El valor + el texto visible del label suele incluir el precio
         return radios.map(radio => {
-            const label = form.querySelector(`label > input[value="${radio.value}"]`)?.parentElement;
-            const text = label ? (label.innerText || '').trim() : radio.value;
+            const text = getOptionTextFromRadio(radio);
             return { value: radio.value, text };
         });
     }
@@ -291,8 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('Por favor, seleccione una opción antes de ordenar.');
                     return;
                 }
-                const label = form.querySelector(`label > input[value="${selectedRadio.value}"]`)?.parentElement;
-                optionText = label ? label.innerText.trim() : selectedRadio.value;
+                optionText = getOptionTextFromRadio(selectedRadio);
             }
 
             currentOrderType = 'single';
@@ -330,8 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('Por favor, seleccione una opción antes de agregar al carrito.');
                     return;
                 }
-                const label = form.querySelector(`label > input[value="${selectedRadio.value}"]`)?.parentElement;
-                optionText = label ? label.innerText.trim() : selectedRadio.value;
+                optionText = getOptionTextFromRadio(selectedRadio);
             }
 
             const existingIndex = cart.findIndex(item => item.name === productName && item.option === optionText);
