@@ -1,4 +1,89 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Lista de bebidas destacadas de la carta física
+    const cafesEspeciales = [
+        {
+            titulo: "2x1 en capuchino y Latte",
+            descripcion: "comparte nuestra promocion de 2x1 en capuchino y Latte, con un toque de amor y cafe.",
+            imagen: "Imagenes/café/2x1_.png"
+        },
+        {
+            titulo: "Affogato",
+            descripcion: "Bola de helado de vainilla ahogada en un shot de espreso caliente recien extraído.",
+            precio: "$9.000",
+            imagen: "Imagenes/café/Affogato.jpeg"
+        },
+        {
+            titulo: "Orange Coffe",
+            descripcion: "Deliciosa mezcla de jugo de naranja natural y espreso de origen.",
+            precio: "$8.000",
+            imagen: "Imagenes/café/Orange_coffe.png"
+        },
+        {
+            titulo: "Capricho Bombón",
+            descripcion: "Deliciosa mezcla de leche condensada, leche cremada y espreso de origen.",
+            precio: "$9.000",
+            imagen: "Imagenes/café/Capricho_Bombon.jpeg"
+        },
+        {
+            titulo: "Latte Macchiato",
+            descripcion: "Leche cremada con espreso especial de Caicedonia.",
+            precio: "$12.000",
+            imagen: "Imagenes/café/LAtte_Macchiato.mp4"
+        }
+    ];
+
+    const welcomeModal = document.getElementById('welcomeModal');
+    const closeBtn = document.getElementById('closeWelcomeModal');
+    const progressBar = document.getElementById('modalProgressBar');
+
+    // Seleccionar una bebida de especialidad al azar
+    const cafeElegido = cafesEspeciales[Math.floor(Math.random() * cafesEspeciales.length)];
+
+    // Inyectar datos en el modal
+    document.getElementById('modalProductTitle').textContent = cafeElegido.titulo;
+    document.getElementById('modalProductDesc').textContent = cafeElegido.descripcion;
+    document.getElementById('modalProductPrice').textContent = cafeElegido.precio;
+    document.getElementById('modalProductImg').src = cafeElegido.imagen;
+    document.getElementById('modalProductImg').alt = cafeElegido.titulo;
+
+    // Tiempo de visualización en milisegundos (Ajustado a 5 segundos para mejor lectura)
+    const TIEMPO_VISUALIZACION = 11000; 
+
+    // Ajustar la velocidad de la animación en CSS
+    progressBar.style.transition = `width ${TIEMPO_VISUALIZACION / 1000}s linear`;
+
+    // Mostrar modal
+    welcomeModal.classList.add('show');
+
+    // Iniciar barra de tiempo
+    setTimeout(() => {
+        progressBar.style.width = '0%';
+    }, 50);
+
+    const closeModal = () => {
+        welcomeModal.classList.remove('show');
+    };
+
+    // Temporizador de cierre automático
+    const autoCloseTimer = setTimeout(() => {
+        closeModal();
+    }, TIEMPO_VISUALIZACION);
+
+    // Eventos de cierre manual
+    closeBtn.addEventListener('click', () => {
+        clearTimeout(autoCloseTimer);
+        closeModal();
+    });
+
+    welcomeModal.addEventListener('click', (e) => {
+        if (e.target === welcomeModal) {
+            clearTimeout(autoCloseTimer);
+            closeModal();
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
     // Get all "Ordenar" buttons
     const orderButtons = document.querySelectorAll('.productos > button:nth-of-type(1)');
 
@@ -703,3 +788,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+

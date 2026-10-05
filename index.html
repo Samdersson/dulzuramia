@@ -13,6 +13,37 @@
 </head>
 <body>
 
+   <!-- Modal de Lanzamiento: Nueva Carta de Café -->
+    <div id="welcomeModal" class="welcome-modal-overlay">
+        <div class="welcome-modal-card coffee-theme">
+            <button id="closeWelcomeModal" class="close-welcome-btn" aria-label="Cerrar">&times;</button>
+            
+            <div class="welcome-badge coffee-badge">☕ ¡NUEVO LANZAMIENTO!</div>
+            <h2>Nueva Carta de Café Especial</h2>
+            
+            <div class="welcome-product-content">
+                <p class="coffee-origin">
+                    Producido localmente en <strong>Caicedonia, Valle del Cauca</strong> ☕✨
+                </p>
+
+                <img id="modalProductImg" src="" alt="Café Especial" class="welcome-img coffee-img">
+
+                <div class="coffee-details">
+                    <h3 id="modalProductTitle">Cargando receta...</h3>
+                    <p id="modalProductDesc"></p>
+                    <span class="barista-tag">👨‍🍳 Receta exclusiva de nuestro Barista</span>
+                    <span id="modalProductPrice" class="welcome-price"></span>
+                </div>
+            </div>
+
+            <p class="coffee-slogan">"Del corazón cafetero de Caicedonia, directo a tu taza"</p>
+
+            <div class="modal-timer-bar">
+                <div id="modalProgressBar" class="progress-bar-fill coffee-progress"></div>
+            </div>
+        </div>
+    </div>
+
    
     <!-- <div class ="navidad-gif">
         <img src="https://usagif.com/wp-content/uploads/gif/snwflks-30.gif" alt="Regalo de Navidad">

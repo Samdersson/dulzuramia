@@ -605,3 +605,79 @@ main {
     margin: 0.5rem 0;
     font-size: 1.1rem;
 }
+
+
+/* ==========================================
+   FIX MODAL FLOTANTE CENTRADO
+   ========================================== */
+
+/* Contenedor oscuro que cubre toda la pantalla */
+.welcome-modal-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: rgba(0, 0, 0, 0.65) !important;
+    backdrop-filter: blur(4px);
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 99999 !important; /* Por encima de todo */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Estado visible cuando JS añade .show */
+.welcome-modal-overlay.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Tarjeta flotante centrada */
+.welcome-modal-card {
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    width: 90% !important;
+    max-width: 420px !important;
+    padding: 1.8rem !important;
+    text-align: center !important;
+    position: relative !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+    margin: 0 auto !important;
+}
+
+/* Botón X posicionado arriba a la derecha de la tarjeta */
+.close-welcome-btn {
+    position: absolute !important;
+    top: -12px !important;
+    right: -12px !important;
+    background: linear-gradient(145deg, #ff5dbc, #fc9bdc) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 38px !important;
+    height: 38px !important;
+    color: white !important;
+    font-size: 20px !important;
+    cursor: pointer !important;
+    box-shadow: 3px 3px 8px #c43a7f !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* Para imágenes en formato Historia de Instagram (9:16) */
+.welcome-img, 
+.welcome-img.coffee-img {
+    width: 140px !important;            /* Ancho fijo cómodo */
+    height: 220px !important;           /* Alto proporcional para formato vertical */
+    max-width: 100% !important;
+    object-fit: cover !important;       /* Mantiene el encuadre central de la historia sin deformar */
+    object-position: center !important;  /* Enfoca el centro de la foto */
+    border-radius: 16px !important;     /* Bordes redondeados elegantes tipo tarjeta */
+    border: 3px solid #ff5dbc !important;
+    margin: 0.5rem auto 0.8rem !important;
+    display: block !important;
+    box-shadow: 0 4px 12px rgba(255, 93, 188, 0.25) !important;
+}
