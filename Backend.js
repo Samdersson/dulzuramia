@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('modalProductImg').alt = cafeElegido.titulo;
 
     // Tiempo de visualización en milisegundos (Ajustado a 5 segundos para mejor lectura)
-    const TIEMPO_VISUALIZACION = 11000; 
+    const TIEMPO_VISUALIZACION = 15000; 
 
     // Ajustar la velocidad de la animación en CSS
     progressBar.style.transition = `width ${TIEMPO_VISUALIZACION / 1000}s linear`;

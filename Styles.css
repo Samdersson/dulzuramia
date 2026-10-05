@@ -672,7 +672,7 @@ main {
 .welcome-img.coffee-img {
     width: 140px !important;            /* Ancho fijo cómodo */
     height: 220px !important;           /* Alto proporcional para formato vertical */
-    max-width: 100% !important;
+    max-width: 90% !important;
     object-fit: cover !important;       /* Mantiene el encuadre central de la historia sin deformar */
     object-position: center !important;  /* Enfoca el centro de la foto */
     border-radius: 16px !important;     /* Bordes redondeados elegantes tipo tarjeta */
