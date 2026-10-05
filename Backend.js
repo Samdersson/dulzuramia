@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             titulo: "Latte Macchiato",
             descripcion: "Leche cremada con espreso especial de Caicedonia.",
             precio: "$12.000",
-            imagen: "Imagenes/café/LAtte_Macchiato.mp4"
+            imagen: "Imagenes/café/Latte_Macchiato.jpeg"
         }
     ];
 
