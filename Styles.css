@@ -249,7 +249,7 @@ nav ul li a:hover {
     }
 }
 
-footer {
+/* footer {
     background: linear-gradient(to right, #fc9bdc, #ff5dbc);
     border-radius: 10px 10px 50px 50px ;
     color: white;
@@ -261,7 +261,7 @@ footer {
     margin: auto;
     margin-top: 2rem;
     
-}
+} */
 
 /* Added styles for centering container and logo image */
 

@@ -1,0 +1,147 @@
+
+/* footer */
+/* Footer & Redes Sociales */
+.site-footer {
+  background-color: var(--card-bg, #1e1e1e);
+  border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  padding: 2.5rem 1rem;
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.footer-text {
+  color: var(--text-muted, #a0a0a0);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.dev-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.dev-link:hover {
+  color: var(--accent-color, #00d2ff);
+  text-decoration: underline;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+/* Estilos base para los botones del footer */
+.btn-dev-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* Botón Sitio Web 360Digital */
+.btn-web {
+  background-color: transparent;
+  color: #00d2ff;
+  border: 1px solid #00d2ff;
+}
+
+.btn-web:hover {
+  background-color: #00d2ff;
+  color: #000;
+  box-shadow: 0 4px 15px rgba(0, 210, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Botón Portafolio Samdersson */
+.btn-portfolio {
+  background-color: transparent;
+  color: #a855f7;
+  border: 1px solid #a855f7;
+}
+
+.btn-portfolio:hover {
+  background-color: #a855f7;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Botón Instagram */
+.btn-instagram {
+  background-color: transparent;
+  color: #e1306c;
+  border: 1px solid #e1306c;
+}
+
+.btn-instagram:hover {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 15px rgba(225, 48, 108, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Botón WhatsApp */
+.btn-whatsapp {
+  background-color: transparent;
+  color: #25d366;
+  border: 1px solid #25d366;
+}
+
+.btn-whatsapp:hover {
+  background-color: #25d366;
+  color: #000;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Ajuste responsivo para pantallas medianas/grandes */
+@media (min-width: 768px) {
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* 📜 Scroll Vertical para el menú de categorías */
+#dropdown-categorias {
+  max-height: 300px; /* Altura máxima visible (ajusta este valor a tu gusto) */
+  overflow-y: auto;  /* Activa la barra de desplazamiento vertical */
+}
+
+/* 🎨 Opcional: Estilo elegante y discreto para la barra de scroll */
+#dropdown-categorias::-webkit-scrollbar {
+  width: 6px;
+}
+
+#dropdown-categorias::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+#dropdown-categorias::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+}
+
+#dropdown-categorias::-webkit-scrollbar-thumb:hover {
+  background: #ff0000; /* Resalta con el rojo de tu marca */
+}
