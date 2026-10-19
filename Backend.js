@@ -1,3 +1,54 @@
+// ==========================================
+// REPRODUCTOR DE YOUTUBE (10 SEGUNDOS EXACTOS)
+// ==========================================
+
+let player;
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('youtubeAudio', {
+        events: {
+            'onReady': onPlayerReady
+        }
+    });
+}
+
+function onPlayerReady(event) {
+    const startAudio = () => {
+        if (player && player.unMute) {
+            player.setVolume(100);
+            player.unMute();
+            player.playVideo();
+
+            // 1. A los 9 segundos empezamos a bajar el volumen paulatinamente
+            setTimeout(() => {
+                let vol = 100;
+                const fadeYT = setInterval(() => {
+                    vol -= 10;
+                    if (vol <= 0) {
+                        clearInterval(fadeYT);
+                        player.pauseVideo(); // PAUSA DEFINITIVA A LOS 10 SEGUNDOS
+                    } else {
+                        player.setVolume(vol);
+                    }
+                }, 100); // 10 pasos de 100ms = 1 segundo de desvanecimiento
+            }, 9000); // Espera 9 segundos antes del fade-out
+
+            // Remover listeners para que no vuelva a sonar en clics posteriores
+            document.removeEventListener('click', startAudio);
+            document.removeEventListener('touchstart', startAudio);
+        }
+    };
+
+    document.addEventListener('click', startAudio);
+    document.addEventListener('touchstart', startAudio);
+}
+
+// Cargar dinámicamente el script de la API de YouTube
+const tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+const firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
 document.addEventListener('DOMContentLoaded', () => {
     // Lista de bebidas destacadas de la carta física
     const cafesEspeciales = [

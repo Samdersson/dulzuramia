@@ -13,7 +13,7 @@
 /* Estilo base para los fantasmas */
 .floating-gif {
     position: absolute !important;
-    width: 55px !important; /* Tamaño pequeño y discreto */
+    width: 100px !important; /* Tamaño pequeño y discreto */
     height: auto !important;
     opacity: 0.85;
 }
@@ -91,3 +91,48 @@
         transform: translate(65vw, -70vh) rotate(8deg);
     }
 }
+
+/* Estilos para el GIF de Navidad */
+.horror {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /*z-index: -1; /* Detrás de todo el contenido */
+    pointer-events: none; /* No interfiere con clics */
+    overflow: hidden;
+    margin: auto;
+}
+
+.horror img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3; /* Ajusta la opacidad para que no distraiga */
+    margin: auto;
+}
+
+
+.fondo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* Detrás de todo el contenido
+    pointer-events: none; /* No interfiere con clics */
+    overflow: hidden;
+    margin: auto;
+}
+
+.fondo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9; /* Ajusta la opacidad para que no distraiga */
+    margin: auto;
+}
+
+
+
