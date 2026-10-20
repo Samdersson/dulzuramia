@@ -840,3 +840,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+function toggleReceta(element) {
+    // Encuentra la tarjeta contenedora
+    const card = element.parentElement;
+    
+    // Alterna la clase 'active' para abrir o cerrar
+    card.classList.toggle('active');
+}
+
+
+// Abrir el visor con la foto ampliada
+function verFotoGrande(src, titulo) {
+    const modal = document.getElementById('lightboxModal');
+    const img = document.getElementById('lightboxImg');
+    const title = document.getElementById('lightboxTitle');
+
+    img.src = src;
+    title.textContent = titulo || 'Presentación Final';
+    modal.classList.add('show');
+}
+
+// Cerrar el visor
+function cerrarFotoGrande() {
+    const modal = document.getElementById('lightboxModal');
+    modal.classList.remove('show');
+}
+

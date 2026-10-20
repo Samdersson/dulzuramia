@@ -1,0 +1,150 @@
+/* ==========================================
+   ESTILOS RECETARIO EXPANDIBLE - DULZURA MÍA
+   ========================================== */
+
+.barismo-card {
+    background: #ffffff;
+    border-radius: 18px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(255, 93, 188, 0.2);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Header Resumen */
+.barismo-card-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1rem;
+    cursor: pointer;
+    background: #ffffff;
+    user-select: none;
+}
+
+.summary-info h2 {
+    margin: 0 0 6px 0;
+    font-size: 1.2rem;
+    color: #fc2bbd;
+    font-weight: 700;
+}
+
+.badge-categoria {
+    background: linear-gradient(145deg, #ff5dbc, #fc9bdc);
+    color: white;
+    padding: 0.25rem 0.7rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.flecha-icon {
+    font-size: 1.2rem;
+    color: #ff5dbc;
+    transition: transform 0.3s ease;
+}
+
+.barismo-card.active .flecha-icon {
+    transform: rotate(180deg);
+}
+
+.barismo-card.active {
+    box-shadow: 0 8px 25px rgba(255, 93, 188, 0.2);
+}
+
+/* Detalles Desplegables */
+.barismo-card-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+    background-color: #fafafa;
+}
+
+.barismo-card.active .barismo-card-details {
+    max-height: 1200px;
+    transition: max-height 0.4s ease-in-out;
+}
+
+.details-content {
+    padding: 1.2rem;
+    border-top: 1px dashed rgba(255, 93, 188, 0.3);
+}
+
+/* Foto Grande Integrada */
+.barismo-foto-container {
+    text-align: center;
+    margin-bottom: 1.2rem;
+}
+
+.barismo-foto-grande {
+    width: 40%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 3px solid #ff5dbc;
+    box-shadow: 0 6px 15px rgba(255, 93, 188, 0.2);
+}
+
+.foto-label {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    color: #777;
+    font-style: italic;
+}
+
+/* Ingredientes, Proceso y Marketing */
+.barismo-ingredientes h3, 
+.barismo-proceso h3, 
+.barismo-marketing h3 {
+    font-size: 1rem;
+    color: #333;
+    margin: 1rem 0 0.5rem 0;
+}
+
+.barismo-ingredientes ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.barismo-ingredientes li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0.8rem;
+    background: #ffffff;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    font-size: 0.92rem;
+    border-left: 4px solid #ff5dbc;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.barismo-proceso ol {
+    padding-left: 1.2rem;
+    margin: 0;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.4;
+}
+
+.barismo-proceso li {
+    margin-bottom: 0.4rem;
+}
+
+.barismo-marketing {
+    background: #fff0f7;
+    padding: 0.9rem;
+    border-radius: 12px;
+    border: 1px dashed #ff5dbc;
+    margin-top: 1.2rem;
+}
+
+.barismo-marketing p {
+    margin: 0;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.4;
+}
