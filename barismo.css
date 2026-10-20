@@ -53,6 +53,16 @@
     box-shadow: 0 8px 25px rgba(255, 93, 188, 0.2);
 }
 
+.barismo-header {
+    font-size: 1.4rem;
+    color: #ff5dbc;
+    margin: 0;
+    align-items: center;
+    text-align: center;
+    
+    
+}
+
 /* Detalles Desplegables */
 .barismo-card-details {
     max-height: 0;
