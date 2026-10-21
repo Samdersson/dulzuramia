@@ -866,3 +866,34 @@ function cerrarFotoGrande() {
     modal.classList.remove('show');
 }
 
+// Listener seguro para el evento de WhatsApp
+document.addEventListener('DOMContentLoaded', () => {
+    const btnWhatsapp = document.querySelector('.btn-whatsapp');
+    if (btnWhatsapp) {
+        btnWhatsapp.addEventListener('click', () => {
+            if (typeof gtag === 'function') {
+                gtag('event', 'click_whatsapp', {
+                    'event_category': 'Contacto',
+                    'event_label': 'Pedido WhatsApp Caicedonia'
+                });
+            }
+        });
+    }
+});
+
+// Función para abrir/cerrar recetas y enviar evento a Analytics
+function toggleReceta(element) {
+    const card = element.parentElement;
+    card.classList.toggle('active');
+
+    // Si se abrió la receta, enviamos el evento
+    if (card.classList.contains('active')) {
+        const nombreCafe = element.querySelector('h2') ? element.querySelector('h2').textContent : 'Café';
+        if (typeof gtag === 'function') {
+            gtag('event', 'ver_receta_barismo', {
+                'event_category': 'Recetario',
+                'event_label': nombreCafe
+            });
+        }
+    }
+}
